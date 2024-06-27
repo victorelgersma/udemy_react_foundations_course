@@ -8,6 +8,7 @@ function PostList() {
   const [enteredBody, setEnteredBody] = useState("");
   const [enteredAuthor, setEnteredAuthor] = useState("");
   const [modalIsVisible, setModalIsVisible] = useState(true);
+
   const changeBodyHandler = (event) => {
     console.log(event.target.value);
     setEnteredBody(event.target.value);
@@ -24,12 +25,14 @@ function PostList() {
 
   return (
     <>
-      <Modal onClose={hideModalHandler}>
-        <NewPost
-          onBodyChange={changeBodyHandler}
-          onAuthorChange={authorChangeHandler}
-        />
-      </Modal>
+      {modalIsVisible && (
+        <Modal onClose={hideModalHandler}>
+          <NewPost
+            onBodyChange={changeBodyHandler}
+            onAuthorChange={authorChangeHandler}
+          />
+        </Modal>
+      )}
       <ul className={classes.posts}>
         <Post author={enteredAuthor} body={enteredBody} />
         <Post author="Manuel" body="Check out the full course" />
